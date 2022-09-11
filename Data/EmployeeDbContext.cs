@@ -34,5 +34,6 @@ namespace Data
         public DbSet<Skills> Skills { get; set; }
         public DbSet<SkillMap> SkillMaps { get; set; }
         public DbSet<SoftLock> SoftLocks { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

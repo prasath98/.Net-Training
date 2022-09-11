@@ -34,6 +34,6 @@ namespace Entities
         [Column("mgrstatuscomment")]
         public string MgrStatuscomment { get; set; }
         [Column("mgrlastupdate")]
-        public string MgrLastupdate { get; set; }
+        public DateTime? MgrLastupdate { get; set; }
     }
 }
