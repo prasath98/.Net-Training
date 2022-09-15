@@ -1,12 +1,14 @@
 using Core.Abstraction.IEmployeeService;
 using Core.Abstraction.ISoftLockService;
 using Core.Abstraction.IUserService;
+using Core.Helpers;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Service;
 using Service.EmployeeService;
 using Service.SoftLockService;
-using Service.UserService;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped(typeof(IEmployeeService), typeof(EmployeeService));
 builder.Services.AddScoped(typeof(ISoftLockService), typeof(SoftLockService));
 builder.Services.AddScoped(typeof(IUserService), typeof(UserService));
+
 
 builder.Services.AddDbContext<EmployeeDbContext>(
       options => options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Employee;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
@@ -36,12 +39,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
 

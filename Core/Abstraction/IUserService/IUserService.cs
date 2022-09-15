@@ -10,7 +10,8 @@ namespace Core.Abstraction.IUserService
 {
     public interface IUserService
     {
-        Task<User?> GetUser(string UserName);
-        Task<User?> CreateUser(UserDto User);
+        AuthenticateResponse Authenticate(AuthenticateRequest model);
+        IEnumerable<User> GetAll();
+        User GetById(int id);
     }
 }

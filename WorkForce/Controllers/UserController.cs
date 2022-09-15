@@ -1,10 +1,12 @@
 ﻿using Core.Abstraction.IUserService;
+using Core.Helpers;
 using Core.ViewModel;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WorkForce.Controllers
 {
+    
     [ApiController]
     [Route("api/[controller]/[action]")]
     public class UserController : Controller
@@ -16,24 +18,43 @@ namespace WorkForce.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
-        public async Task<IActionResult> GetUser(string UserName)
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate(AuthenticateRequest model)
         {
-            var result = await _userService.GetUser(UserName);
-            if (result != null)
-                return new OkObjectResult(result);
-            else
-                return new NoContentResult();
+            var response = _userService.Authenticate(model);
+
+            if (response == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            return Ok(response);
         }
 
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SoftLock))]
-        public async Task<IActionResult> CreateUser(UserDto user)
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            await _userService.CreateUser(user);
-            return new OkObjectResult(user);
+            var users = _userService.GetAll();
+            return Ok(users);
         }
+
+        //[HttpGet]
+        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
+        //public async Task<IActionResult> GetUser(string UserName)
+        //{
+        //    var result = await _userService.GetUser(UserName);
+        //    if (result != null)
+        //        return new OkObjectResult(result);
+        //    else
+        //        return new NoContentResult();
+        //}
+
+        //[HttpPost]
+        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SoftLock))]
+        //public async Task<IActionResult> CreateUser(UserDto user)
+        //{
+        //    await _userService.CreateUser(user);
+        //    return new OkObjectResult(user);
+        //}
 
     }
 }
