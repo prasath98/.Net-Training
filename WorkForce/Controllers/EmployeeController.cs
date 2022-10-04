@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WorkForce.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;
@@ -16,7 +16,19 @@ namespace WorkForce.Controllers
             _employeeService = employeeService;
         }
 
-        [HttpGet]
+
+        [HttpGet,Route("GetEmployee")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Employees))]
+        public IActionResult GetEmployee()
+        {
+            var result = _employeeService.GetEmployee();
+            if (result != null)
+                return new OkObjectResult(result);
+            else
+                return new NoContentResult();
+        }
+
+        [HttpGet, Route("GetAllEmployee")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Employees))]
         public async Task<IActionResult> GetAllEmployee(int employeeId)
         {
@@ -27,7 +39,7 @@ namespace WorkForce.Controllers
                 return new NoContentResult();
         }
 
-        [HttpPost]
+        [HttpPost, Route("CreateEmployee")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Employees))]
         public async Task<IActionResult> CreateEmployee(Employee employee)
         {
@@ -35,7 +47,7 @@ namespace WorkForce.Controllers
             return new OkObjectResult(employee);
         }
 
-        [HttpPut]
+        [HttpPut, Route("UpdateEmployee")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Employees))]
         public async Task<IActionResult> UpdateEmployee(Employee employee)
         {
@@ -43,7 +55,7 @@ namespace WorkForce.Controllers
             return new OkObjectResult(result);
         }
 
-        [HttpPut]
+        [HttpDelete, Route("DeleteEmployee")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Employees))]
         public async Task<IActionResult> DeleteEmployee(int EmployeeId)
         {

@@ -7,7 +7,7 @@ using Core.Abstraction.ISoftLockService;
 namespace WorkForce.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class SoftLockController : Controller
     {
         private readonly ISoftLockService _softLockService;
@@ -36,7 +36,7 @@ namespace WorkForce.Controllers
             return new OkObjectResult(softLock);
         }
 
-        [HttpPut]
+        [HttpPut, Route("UpdateSoftLock")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SoftLock))]
         public async Task<IActionResult> UpdateSoftLock(SoftLockDto softLock)
         {
@@ -44,7 +44,7 @@ namespace WorkForce.Controllers
             return new OkObjectResult(result);
         }
 
-        [HttpPut]
+        [HttpPut, Route("DeleteSoftLock")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SoftLock))]
         public async Task<IActionResult> DeleteSoftLock(int LockId)
         {

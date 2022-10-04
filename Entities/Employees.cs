@@ -23,12 +23,12 @@ namespace Entities
         [Column("wfm_manager")]
         [MaxLength(30)]
         public string Wfm_Manager { get; set; }
-        [Column("email"), DataType("nvarchar")]
+       
         public string Email { get; set; }
         [Column("lockstatus")]
         [MaxLength(30)]
         public string LockStatus { get; set; }
-        public decimal Experience { get; set; }
+        public int Experience { get; set; }
         [Column("profile_Id")]
         public int ProfileId { get; set; }
 

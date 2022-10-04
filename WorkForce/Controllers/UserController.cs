@@ -8,7 +8,7 @@ namespace WorkForce.Controllers
 {
     
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -29,7 +29,7 @@ namespace WorkForce.Controllers
             return Ok(response);
         }
 
-        [Authorize]
+       // [Authorize]
         [HttpGet]
         public IActionResult GetAll()
         {

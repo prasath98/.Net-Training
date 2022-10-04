@@ -14,8 +14,9 @@ namespace Entities
         [Key]
         [Column("employee_Id")]
         public int EmployeeId { get; set; }
-        public Employees Employees { get; set; }
+        public Employees Employees { get; set; }     
         [Column("skillId")]
+        [Key]
         public int SkillId { get; set; }
         public Skills Skills { get; set; }
     }

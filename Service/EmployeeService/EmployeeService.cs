@@ -38,7 +38,7 @@ namespace Service.EmployeeService
                 result.Wfm_Manager = employee.wfm_manager;
                 result.Experience = employee.Experience;
                 result.ProfileId = employee.profile_Id;
-                result.Email = employee.email;
+                result.Email = employee.Email;
                 await _dbContext.Employees.AddAsync(result);
                 await _dbContext.SaveChangesAsync();
                 return result;
@@ -58,7 +58,7 @@ namespace Service.EmployeeService
                 result.Wfm_Manager = employee.wfm_manager;
                 result.Experience = employee.Experience;
                 result.ProfileId = employee.profile_Id;
-                result.Email = employee.email;
+                result.Email = employee.Email;
                 _dbContext.Employees.Update(result);
                 await _dbContext.SaveChangesAsync();
                 return result;
@@ -76,6 +76,12 @@ namespace Service.EmployeeService
                 return result;
             }
             return new Employees();
+        }
+
+        public List<Employees> GetEmployee()
+        {
+            var result = _dbContext.Employees.Include(s=> s.SkillMaps).ThenInclude(s =>s.Skills).ToList();
+            return result;
         }
     }
 }
