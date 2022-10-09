@@ -20,10 +20,10 @@ namespace Service.SoftLockService
             _dbContext = dbContext;
         }
 
-        public async Task<SoftLock?> GetSoftLock(int LockId)
+        public async Task<List<SoftLock>> GetSoftLock()
         {
-            var result = await _dbContext.SoftLocks.FirstOrDefaultAsync(s => s.LockId == LockId);
-            return result ?? null;
+            var result = await _dbContext.SoftLocks.ToListAsync();
+            return result;
         }
 
         public async Task<SoftLock?> CreateSoftLock(SoftLockDto softLock)

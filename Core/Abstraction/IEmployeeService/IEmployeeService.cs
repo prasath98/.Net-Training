@@ -10,7 +10,7 @@ namespace Core.Abstraction.IEmployeeService
 {
     public interface IEmployeeService
     {
-        List<Employees> GetEmployee();
+        List<EmployeeDto> GetEmployee();
         Task<Employees?> GetAllEmployee(int EmployeeId);
         Task<Employees> CreateEmployee(Employee employee);
         Task<Employees?> UpdateEmployee(Employee employee);

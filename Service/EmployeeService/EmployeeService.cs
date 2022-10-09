@@ -78,9 +78,18 @@ namespace Service.EmployeeService
             return new Employees();
         }
 
-        public List<Employees> GetEmployee()
+        public List<EmployeeDto> GetEmployee()
         {
-            var result = _dbContext.Employees.Include(s=> s.SkillMaps).ThenInclude(s =>s.Skills).ToList();
+            var result = _dbContext.Employees.Include(s => s.SkillMaps).ThenInclude(s => s.Skills).Select(x => new EmployeeDto
+            {
+                EmployeeId = x.EmployeeID,
+                Email = x.Email,
+                Name = x.Name,
+                Manager = x.Manager,
+                Experience = x.Experience,
+                Wfmmanager = x.Wfm_Manager,
+                Skills= x.SkillMaps.Select(y => y.Skills.Name).ToList()
+            }).ToList();
             return result;
         }
     }

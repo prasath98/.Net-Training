@@ -19,9 +19,9 @@ namespace WorkForce.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SoftLock))]
-        public async Task<IActionResult> GetSoftLock(int LockId)
+        public async Task<IActionResult> GetSoftLock()
         {
-            var result = await _softLockService.GetSoftLock(LockId);
+            var result = await _softLockService.GetSoftLock();
             if (result != null)
                 return new OkObjectResult(result);
             else

@@ -10,7 +10,7 @@ namespace Core.Abstraction.ISoftLockService
 {
     public interface ISoftLockService
     {
-        Task<SoftLock?> GetSoftLock(int LockId);
+        Task<List<SoftLock>> GetSoftLock();
         Task<SoftLock?> CreateSoftLock(SoftLockDto softLock);
         Task<SoftLock?> UpdateSoftLock(SoftLockDto softLock);
         Task<SoftLock?> DeleteSoftLock(int LockId);

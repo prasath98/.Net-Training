@@ -14,6 +14,7 @@ namespace Core.ViewModel
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Token { get; set; }
+        public string Role { get; set; }
 
 
         public AuthenticateResponse(User user, string token)
@@ -21,6 +22,7 @@ namespace Core.ViewModel
             Id = user.Id;
             Username = user.UserName;
             Token = token;
+            Role = user.Role;
         }
     }
 }

@@ -26,8 +26,8 @@ namespace Service
         // users hardcoded for simplicity, store in a db with hashed passwords in production applications
         private readonly List<User> _users = new List<User>
         {
-            new User { Id = 1, UserName = "prasath", Password = "password" },
-            new User { Id = 2, UserName = "vinodh", Password = "password" },
+            new User { Id = 1, UserName = "prasath", Password = "password", Role ="manager" },
+            new User { Id = 2, UserName = "vinodh", Password = "password", Role = "Assitant"},
            
        };
 
